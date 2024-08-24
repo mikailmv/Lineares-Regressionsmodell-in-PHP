@@ -1,0 +1,42 @@
+<?php
+
+// Definition der Daten (Beispieldaten)
+$data = [
+    [1, 1],
+    [2, 2],
+    [3, 2.5],
+    [4, 4],
+    [5, 4.5]
+];
+
+// Anzahl der Datenpunkte
+$n = count($data);
+
+// Berechnung der Summen für X, Y, XY und X^2
+$sum_x = 0;
+$sum_y = 0;
+$sum_xy = 0;
+$sum_x_squared = 0;
+
+foreach ($data as $point) {
+    $x = $point[0];
+    $y = $point[1];
+    $sum_x += $x;
+    $sum_y += $y;
+    $sum_xy += ($x * $y);
+    $sum_x_squared += ($x * $x);
+}
+
+// Berechnung der Steigung (m) und des Achsenabschnitts (b)
+$m = ($n * $sum_xy - $sum_x * $sum_y) / ($n * $sum_x_squared - $sum_x * $sum_x);
+$b = ($sum_y - $m * $sum_x) / $n;
+
+echo "Steigung (m): " . $m . PHP_EOL;
+echo "Achsenabschnitt (b): " . $b . PHP_EOL;
+
+// Vorhersage für einen neuen X-Wert
+$new_x = 6;
+$predicted_y = $m * $new_x + $b;
+
+echo "Vorhergesagter Y-Wert für neuen X-Wert ($new_x): " . $predicted_y . PHP_EOL;
+?>
